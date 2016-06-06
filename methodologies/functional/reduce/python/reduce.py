@@ -24,6 +24,18 @@ def imperative_mul(a):
         m *= elem
     return m
 
+def imperative_any(a):
+    for elem in a:
+        if elem:
+            return True
+    return False
+
+def imperative_all(a):
+    for elem in a:
+        if not elem:
+            return False
+    return True
+
 # Functional
 
 def reduce(a, f, initial):
@@ -39,13 +51,11 @@ def functional_mul(a):
     m = lambda a, b: a * b
     return reduce(a, m, 1)
 
-# Are they equal?
+def functional_any(a):
+    _any = lambda a, b: a or b
+    return reduce(a, _any, False)
 
-a1 = [1, 2, 3, 4, 5]
-a2 = [-1, 0, 10, 15]
+def functional_all(a):
+    _all = lambda a, b: a and b
+    return reduce(a, _all, True)
 
-print(imperative_sum(a1) == functional_sum(a1))
-print(imperative_sum(a2) == functional_sum(a2))
-
-print(imperative_mul(a1) == functional_mul(a1))
-print(imperative_mul(a2) == functional_mul(a2))
